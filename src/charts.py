@@ -26,6 +26,21 @@ def create_rate_inflation_chart(dataframe: pd.DataFrame) -> go.Figure:
     figure = go.Figure()
 
     figure.add_trace(
+            go.Scatter(
+                x=dataframe.index,
+                y=dataframe["expected_inflation"],
+                name="Expected Inflation",
+                mode="lines",
+                line={"color": "#0099E5", "width": 2.2},
+                hovertemplate=(
+                    "%{x|%B %Y}<br>"
+                    "Expected inflation: %{y:.2f}%"
+                    "<extra></extra>"
+                ),
+            )
+        )
+    
+    figure.add_trace(
         go.Scatter(
             x=dataframe.index,
             y=dataframe["nominal_rate"],
@@ -35,21 +50,6 @@ def create_rate_inflation_chart(dataframe: pd.DataFrame) -> go.Figure:
             hovertemplate=(
                 "%{x|%B %Y}<br>"
                 "Interest rate: %{y:.2f}%"
-                "<extra></extra>"
-            ),
-        )
-    )
-
-    figure.add_trace(
-        go.Scatter(
-            x=dataframe.index,
-            y=dataframe["expected_inflation"],
-            name="Expected Inflation",
-            mode="lines",
-            line={"color": "#0099E5", "width": 2.2},
-            hovertemplate=(
-                "%{x|%B %Y}<br>"
-                "Expected inflation: %{y:.2f}%"
                 "<extra></extra>"
             ),
         )
